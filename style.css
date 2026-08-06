@@ -61,22 +61,15 @@ body {
 .content-hidden { opacity: 0; pointer-events: none; transition: opacity 1s ease; }
 .content-hidden.revealed { opacity: 1; pointer-events: auto; }
 
-/* ===== FIXED TEMPLE IMAGE — bottom of viewport, always visible ===== */
+/* ===== FIXED BG-2 — zoomed, covers full viewport always ===== */
 body::after {
     content: '';
     position: fixed;
-    bottom: 0; left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-    max-width: 780px;
-    height: 70vh;
-    background: url('assets/temple.jpg') center bottom / contain no-repeat;
+    inset: 0;
+    background: url('assets/bg2.png') center center / cover no-repeat;
     pointer-events: none;
     z-index: 0;
-    opacity: 0.55;
-    /* Fade bottom into nothing so it blends */
-    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 12%, rgba(0,0,0,1) 42%);
-    mask-image: linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,0.4) 12%, rgba(0,0,0,1) 42%);
+    opacity: 0.22;
 }
 
 img { display: block; max-width: 100%; }
@@ -402,19 +395,32 @@ a   { text-decoration: none; }
 .arch-frame:hover img { transform: scale(1.05); }
 .arch-sm { width: 180px; height: 240px; border-radius: 90px 90px 0 0; }
 
-/* ============================================================
-   PARCHMENT CARD (Save the Date) — glass version
-   ============================================================ */
+/* Save the Date card — flight image as full background */
 .parchment-card {
     max-width: 680px; margin: 0 auto;
     padding: 56px 40px;
     display: flex; flex-direction: column; align-items: center;
     position: relative; overflow: hidden;
+    /* Flight image background */
+    background-image: url('assets/save_the_date_flight.png');
+    background-size: cover;
+    background-position: center top;
 }
+/* Overlay so text is legible over the image */
+.parchment-card::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: rgba(255, 248, 240, 0.72);
+    backdrop-filter: blur(2px);
+    z-index: 0;
+    border-radius: inherit;
+}
+/* All direct children sit above the overlay */
+.parchment-card > * { position: relative; z-index: 1; }
 .parchment-card::before {
     content: ''; position: absolute; inset: 10px;
-    border: 1px solid rgba(191,149,63,0.22); border-radius: 12px;
-    pointer-events: none;
+    border: 1px solid rgba(191,149,63,0.35); border-radius: 12px;
+    pointer-events: none; z-index: 2;
 }
 .card-heading {
     font-family: var(--ff-serif); font-size: 2.4rem; color: var(--burg); margin-bottom: 6px;
