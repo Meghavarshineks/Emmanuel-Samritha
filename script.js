@@ -37,11 +37,10 @@ document.addEventListener("DOMContentLoaded", () => {
     buildLetters(SAMRITHA, nameLineS);
 
     /* ================================================================
-       ENVELOPE FLAP REVEAL
+       ENVELOPE REVEAL
        Phase 1: Tap seal → seal cracks + golden burst
-       Phase 2: Flap folds back (CSS 3D rotateX)
-       Phase 3: Inner card slides up from envelope
-       Phase 4: Pause → screen fades out → main content fades in
+       Phase 2: Envelope zooms out and fades
+       Phase 3: Main content fades in
     ================================================================ */
     let opened = false;
 
@@ -63,21 +62,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const r = envSealWrap.getBoundingClientRect();
         fireGoldenBurst(r.left + r.width / 2, r.top + r.height / 2);
 
-        /* Step 2: Flap folds back */
+        /* Step 2: Zoom and fade the envelope image */
+        const envImgContainer = document.getElementById("env-img-container");
         setTimeout(() => {
-            envFlap.classList.add("fold-open");
-        }, 450);
-
-        /* Step 3: Card slides up from inside */
-        setTimeout(() => {
-            envInnerCard.classList.add("slide-out");
-        }, 1350);
-
-        /* Step 4: Transition to main website */
-        setTimeout(() => {
+            envImgContainer && envImgContainer.classList.add("zoom-open");
             envScreen.classList.add("fade-out");
-        }, 3200);
+        }, 600);
 
+        /* Step 3: Transition to main website */
         setTimeout(() => {
             envScreen.classList.add("gone");
             mainContent.classList.add("revealed");
@@ -85,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
             playMusic();
             initPetals();
             triggerHeroReveal();
-        }, 4100);
+        }, 1500);
     }
 
     /* ================================================================

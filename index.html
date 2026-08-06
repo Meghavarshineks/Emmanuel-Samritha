@@ -27,57 +27,27 @@
 
     <!-- =============================================
          ENVELOPE SCREEN
-         Step 1: Closed envelope with wax seal
-         Step 2: Tap seal → flap folds back (3D)
-         Step 3: Card slides up from inside
-         Step 4: Content fades in
+         Uses the actual envelope.png (petal-fold style)
+         Seal sits centered over the flap junction
+         Click seal → seal cracks → envelope zooms out/fades → main content
     ============================================== -->
     <div id="env-screen" class="env-screen">
 
-        <!-- Dark backdrop -->
-        <div class="env-backdrop"></div>
-
-        <!-- Envelope assembly (centered card) -->
-        <div class="env-wrap" id="env-wrap">
-
-            <!-- ENVELOPE BODY (back plate — always visible) -->
-            <div class="env-body">
-
-                <!-- Side folds - decorative -->
-                <div class="env-side-left"></div>
-                <div class="env-side-right"></div>
-                <!-- Bottom V fold -->
-                <div class="env-bottom-v"></div>
-
-                <!-- Inner card — starts hidden inside, slides up -->
-                <div class="env-inner-card" id="env-inner-card">
-                    <img src="assets/save_the_date_flight.png" class="inner-card-img" alt="Save the Date">
-                    <div class="inner-card-overlay">
-                        <p class="inner-label">Save the Date</p>
-                        <p class="inner-sub">Our journey to forever begins…</p>
-                        <p class="inner-date">30 · August · 2026</p>
-                    </div>
-                </div>
-
-                <!-- TOP FLAP — the triangle that folds back -->
-                <div class="env-flap" id="env-flap">
-                    <div class="flap-face flap-front"></div>
-                    <div class="flap-face flap-back"></div>
-                </div>
-
-            </div>
-
-            <!-- WAX SEAL — sits over the flap fold line, always on top -->
-            <div class="env-seal-wrap" id="env-seal-wrap">
-                <div class="seal-glow-ring r1"></div>
-                <div class="seal-glow-ring r2"></div>
-                <img src="assets/seal_perfect.png" class="env-seal-img" id="env-seal-img" alt="Wax Seal">
-            </div>
-
-            <!-- Hint text -->
-            <p class="env-hint" id="env-hint">✦ Tap the seal to open ✦</p>
-
+        <!-- Full-screen envelope image -->
+        <div class="env-img-container" id="env-img-container">
+            <img src="assets/envelope.png" class="env-full-img" alt="Envelope" id="env-full-img">
         </div>
+
+        <!-- Wax seal — positioned over center of envelope -->
+        <div class="env-seal-wrap" id="env-seal-wrap">
+            <div class="seal-glow-ring r1"></div>
+            <div class="seal-glow-ring r2"></div>
+            <img src="assets/seal_perfect.png" class="env-seal-img" id="env-seal-img" alt="Wax Seal">
+        </div>
+
+        <!-- Hint -->
+        <p class="env-hint" id="env-hint">✦ Tap the seal to open ✦</p>
+
     </div>
 
     <!-- ===== MAIN CONTENT ===== -->
