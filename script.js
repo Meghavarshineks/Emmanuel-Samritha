@@ -204,13 +204,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* ================================================================
-       TEMPLE PARALLAX RISE (scroll-linked)
+       TEMPLE PARALLAX (scroll-linked)
+       Temple anchored at top — slight downward shift on scroll
+       so gopuram stays visible and lower portion rises up
     ================================================================ */
     function onScroll() {
         if (!templeRise) return;
         const progress = Math.min(window.scrollY / window.innerHeight, 1);
-        templeRise.style.bottom    = `${-8 + progress * 50}%`;
-        templeRise.style.transform = `translateX(-50%) scale(${1 + progress * 0.1})`;
+        // Shift image slightly downward as user scrolls — subtle parallax
+        templeRise.style.transform = `translateX(-50%) translateY(${progress * -40}px) scale(${1 + progress * 0.05})`;
     }
     window.addEventListener("scroll", onScroll, { passive: true });
     onScroll();
