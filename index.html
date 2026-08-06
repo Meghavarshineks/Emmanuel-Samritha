@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emmanuel & Samritha — Wedding Invitation</title>
+    <meta name="description" content="Emmanuel & Samritha's Wedding — 30th August 2026, Hyderabad">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="lock-scroll">
+
+    <audio id="bg-audio" loop preload="none">
+        <source src="assets/music.mp3" type="audio/mp3">
+    </audio>
+
+    <button id="music-toggle" class="music-btn" aria-label="Toggle music">
+        <i class="fa-solid fa-music"></i>
+        <div class="music-pulse"></div>
+    </button>
+
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- ===== ENVELOPE SCREEN ===== -->
+    <div id="envelope-overlay" class="envelope-overlay">
+        <div class="env-img-wrap">
+            <img src="assets/envelope.png" class="env-full-img" alt="envelope">
+        </div>
+        <div id="wax-seal" class="seal-wrap" role="button" aria-label="Click to open">
+            <img src="assets/seal_perfect.png" class="seal-img" alt="wax seal">
+            <div class="seal-ring"></div>
+        </div>
+        <p class="env-hint">✦ Tap the seal to open ✦</p>
+    </div>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main id="main-content" class="main-content">
+
+        <!-- HERO: Sky + Temple architecture rising on scroll -->
+        <section class="hero-section" id="hero-sec">
+            <!-- Pure sky blue backdrop -->
+            <div class="hero-sky"></div>
+
+            <!-- Temple-1.jpg — only architecture, no couple, rises from bottom -->
+            <div class="temple-rise" id="temple-rise">
+                <img src="assets/temple.jpg" class="temple-rise-img" alt="Temple">
+            </div>
+
+            <!-- Name Reveal Curtain — hidden until envelope opens -->
+            <div class="hero-reveal" id="hero-reveal">
+                <!-- Blessed header -->
+                <p class="hero-label reveal-item" style="--d:0s">|| Sri Ganeshay Namah ||</p>
+                <p class="hero-bless reveal-item" style="--d:0.3s">With the blessings of our beloved grandparents</p>
+                <p class="hero-bless-sub reveal-item" style="--d:0.55s">and the love of our parents,</p>
+
+                <!-- ✦ Cinematic letter-by-letter names ✦ -->
+                <div class="hero-names-block">
+                    <div class="name-line" id="name-line-e">
+                        <!-- Letters injected by JS -->
+                    </div>
+                    <p class="hero-weds reveal-item" style="--d:2.2s">— weds —</p>
+                    <div class="name-line" id="name-line-s">
+                        <!-- Letters injected by JS -->
+                    </div>
+                </div>
+
+                <p class="hero-date reveal-item" style="--d:4.2s">30 · August · 2026 · Sunday</p>
+
+                <div class="hero-scroll-cue reveal-item" style="--d:4.8s">
+                    <span>Scroll to explore</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- SAVE THE DATE -->
+        <section class="section-pad" id="save-date-sec">
+            <div class="container">
+                <div class="parchment-card scroll-in">
+                    <div class="arch-frame">
+                        <img src="assets/save_the_date_cropped.jpg" alt="Save the Date">
+                    </div>
+                    <h2 class="card-heading">Save The Date</h2>
+                    <p class="scratch-hint">✦ Scratch the golden seal to reveal our date ✦</p>
+
+                    <div class="scratch-wrap">
+                        <div class="scratch-box">
+                            <canvas id="scratch-canvas"></canvas>
+                            <div class="scratch-reveal">
+                                <span class="reveal-date">30th August 2026</span>
+                                <span class="reveal-day">SUNDAY</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="countdown-grid hidden-till-scratch" id="countdown-grid">
+                        <div class="count-box"><span class="count-num" id="cd-days">00</span><span class="count-lbl">Days</span></div>
+                        <div class="count-box"><span class="count-num" id="cd-hrs">00</span><span class="count-lbl">Hours</span></div>
+                        <div class="count-box"><span class="count-num" id="cd-min">00</span><span class="count-lbl">Mins</span></div>
+                        <div class="count-box"><span class="count-num" id="cd-sec">00</span><span class="count-lbl">Secs</span></div>
+                    </div>
+                    <p class="count-tagline hidden-till-scratch" id="count-tagline">Until our happily ever after begins…</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- EVENTS -->
+        <section class="section-pad" id="events-sec">
+            <div class="container">
+                <h2 class="section-heading scroll-in">Wedding Celebrations</h2>
+                <p class="section-sub scroll-in">Two cherished moments that begin our forever.</p>
+
+                <div class="events-grid">
+                    <!-- Muhurtham -->
+                    <div class="event-card scroll-in">
+                        <div class="arch-frame arch-sm">
+                            <img src="assets/couple_wed.png" alt="Muhurtham">
+                        </div>
+                        <div class="event-tag burgundy-tag">Auspicious Ceremony</div>
+                        <h3 class="event-name">Muhurtham</h3>
+                        <p class="event-desc">The sacred union where holy vows are made and ties are bound for eternity in traditional South Indian rituals.</p>
+                        <ul class="event-meta">
+                            <li><i class="fa-regular fa-calendar text-gold"></i> Sunday, 30th August 2026</li>
+                            <li><i class="fa-regular fa-clock text-gold"></i> 9:00 AM – 10:30 AM IST</li>
+                            <li><i class="fa-solid fa-location-dot text-gold"></i> Sri Venkateswara Temple Mandapam, Jubilee Hills, Hyderabad</li>
+                        </ul>
+                        <div class="event-btns">
+                            <a href="https://maps.google.com/?q=Sri+Venkateswara+Temple+Jubilee+Hills+Hyderabad" target="_blank" class="btn btn-outline"><i class="fa-solid fa-location-arrow"></i> Map</a>
+                            <a href="#" class="btn btn-gold calendar-btn"
+                               data-event-title="Emmanuel & Samritha: Muhurtham"
+                               data-event-date="2026-08-30" data-event-time="09:00"
+                               data-event-venue="Sri Venkateswara Temple Mandapam, Jubilee Hills, Hyderabad">
+                               <i class="fa-regular fa-calendar-plus"></i> Calendar</a>
+                        </div>
+                    </div>
+
+                    <!-- Reception -->
+                    <div class="event-card scroll-in">
+                        <div class="arch-frame arch-sm">
+                            <img src="assets/anime_mini.jpg" alt="Reception">
+                        </div>
+                        <div class="event-tag gold-tag">Banquet Dinner</div>
+                        <h3 class="event-name">Reception</h3>
+                        <p class="event-desc">An evening of celebration, toasts, music and joy as we welcome our loved ones into our new journey together.</p>
+                        <ul class="event-meta">
+                            <li><i class="fa-regular fa-calendar text-gold"></i> Sunday, 30th August 2026</li>
+                            <li><i class="fa-regular fa-clock text-gold"></i> 6:30 PM onwards</li>
+                            <li><i class="fa-solid fa-location-dot text-gold"></i> The Royal Palace Gardens, Jubilee Hills, Hyderabad</li>
+                        </ul>
+                        <div class="event-btns">
+                            <a href="https://maps.google.com/?q=Royal+Palace+Gardens+Jubilee+Hills+Hyderabad" target="_blank" class="btn btn-outline"><i class="fa-solid fa-location-arrow"></i> Map</a>
+                            <a href="#" class="btn btn-gold calendar-btn"
+                               data-event-title="Emmanuel & Samritha: Reception"
+                               data-event-date="2026-08-30" data-event-time="18:30"
+                               data-event-venue="The Royal Palace Gardens, Jubilee Hills, Hyderabad">
+                               <i class="fa-regular fa-calendar-plus"></i> Calendar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- VENUE -->
+        <section class="venue-section">
+            <div class="container">
+                <h2 class="section-heading text-cream scroll-in">Venue & Directions</h2>
+                <p class="section-sub text-cream-muted scroll-in">Find your way to our celebration.</p>
+                <div class="venue-grid">
+                    <div class="venue-card scroll-in">
+                        <i class="fa-solid fa-gopuram venue-icon"></i>
+                        <h3 class="venue-name">Sri Venkateswara Temple Mandapam</h3>
+                        <p class="venue-addr">Road No. 10, Jubilee Hills, Near Film Nagar, Hyderabad, Telangana 500033</p>
+                        <div class="venue-divider"></div>
+                        <p class="venue-note"><i class="fa-solid fa-circle-info"></i> Valet parking available at temple entrance</p>
+                        <a href="https://maps.google.com/?q=Sri+Venkateswara+Temple+Jubilee+Hills+Hyderabad" target="_blank" class="btn btn-gold mt-auto"><i class="fa-solid fa-map-pin"></i> Open in Google Maps</a>
+                    </div>
+                    <div class="venue-card scroll-in">
+                        <i class="fa-solid fa-tree-city venue-icon"></i>
+                        <h3 class="venue-name">The Royal Palace Gardens</h3>
+                        <p class="venue-addr">Road No. 2, Jubilee Hills, Opposite KBR Park, Hyderabad, Telangana 500096</p>
+                        <div class="venue-divider"></div>
+                        <p class="venue-note"><i class="fa-solid fa-circle-info"></i> Opposite Gate 1, KBR National Park</p>
+                        <a href="https://maps.google.com/?q=Royal+Palace+Gardens+Jubilee+Hills+Hyderabad" target="_blank" class="btn btn-gold mt-auto"><i class="fa-solid fa-map-pin"></i> Open in Google Maps</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FOOTER -->
+        <footer class="site-footer">
+            <div class="footer-monogram">E &amp; S</div>
+            <p class="footer-quote">"Two souls, one heart, a lifetime of love."</p>
+            <p class="footer-copy">&copy; 2026 Emmanuel &amp; Samritha</p>
+        </footer>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
