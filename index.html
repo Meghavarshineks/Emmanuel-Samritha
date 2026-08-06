@@ -22,51 +22,80 @@
         <div class="music-pulse"></div>
     </button>
 
-    <!-- Particle burst canvas — sits above everything during reveal -->
     <canvas id="burst-canvas"></canvas>
     <canvas id="particles-canvas"></canvas>
 
-    <!-- ===== ENVELOPE OVERLAY ===== -->
-    <!-- Split into LEFT and RIGHT halves — they slide apart on click -->
-    <div id="env-overlay">
-        <!-- Left curtain -->
-        <div class="env-half env-left">
-            <img src="assets/envelope.png" class="env-img env-img-left" alt="">
-        </div>
-        <!-- Right curtain -->
-        <div class="env-half env-right">
-            <img src="assets/envelope.png" class="env-img env-img-right" alt="">
-        </div>
+    <!-- =============================================
+         ENVELOPE SCREEN
+         Step 1: Closed envelope with wax seal
+         Step 2: Tap seal → flap folds back (3D)
+         Step 3: Card slides up from inside
+         Step 4: Content fades in
+    ============================================== -->
+    <div id="env-screen" class="env-screen">
 
-        <!-- Seal — centred over the split -->
-        <div id="seal-btn">
-            <div class="seal-glow-ring"></div>
-            <div class="seal-glow-ring ring2"></div>
-            <img id="seal-img" src="assets/seal_perfect.png" alt="Click to open">
-            <p class="seal-hint">✦ Tap the seal to open ✦</p>
+        <!-- Dark backdrop -->
+        <div class="env-backdrop"></div>
+
+        <!-- Envelope assembly (centered card) -->
+        <div class="env-wrap" id="env-wrap">
+
+            <!-- ENVELOPE BODY (back plate — always visible) -->
+            <div class="env-body">
+
+                <!-- Side folds - decorative -->
+                <div class="env-side-left"></div>
+                <div class="env-side-right"></div>
+                <!-- Bottom V fold -->
+                <div class="env-bottom-v"></div>
+
+                <!-- Inner card — starts hidden inside, slides up -->
+                <div class="env-inner-card" id="env-inner-card">
+                    <img src="assets/save_the_date_flight.png" class="inner-card-img" alt="Save the Date">
+                    <div class="inner-card-overlay">
+                        <p class="inner-label">Save the Date</p>
+                        <p class="inner-sub">Our journey to forever begins…</p>
+                        <p class="inner-date">30 · August · 2026</p>
+                    </div>
+                </div>
+
+                <!-- TOP FLAP — the triangle that folds back -->
+                <div class="env-flap" id="env-flap">
+                    <div class="flap-face flap-front"></div>
+                    <div class="flap-face flap-back"></div>
+                </div>
+
+            </div>
+
+            <!-- WAX SEAL — sits over the flap fold line, always on top -->
+            <div class="env-seal-wrap" id="env-seal-wrap">
+                <div class="seal-glow-ring r1"></div>
+                <div class="seal-glow-ring r2"></div>
+                <img src="assets/seal_perfect.png" class="env-seal-img" id="env-seal-img" alt="Wax Seal">
+            </div>
+
+            <!-- Hint text -->
+            <p class="env-hint" id="env-hint">✦ Tap the seal to open ✦</p>
+
         </div>
     </div>
 
     <!-- ===== MAIN CONTENT ===== -->
     <main id="main-content" class="main-content content-hidden">
 
-        <!-- HERO -->
         <section class="hero-section" id="hero-sec">
             <div class="temple-rise" id="temple-rise">
                 <img src="assets/temple.jpg" class="temple-rise-img" alt="Temple">
             </div>
-
             <div class="hero-reveal" id="hero-reveal">
                 <p class="hero-label reveal-item" style="--d:0.1s">|| Sri Ganeshay Namah ||</p>
                 <p class="hero-bless reveal-item" style="--d:0.35s">With the blessings of our beloved grandparents</p>
                 <p class="hero-bless-sub reveal-item" style="--d:0.6s">and the love of our parents,</p>
-
                 <div class="hero-names-block">
                     <div class="name-line" id="name-line-e"></div>
                     <p class="hero-weds reveal-item" style="--d:2.3s">— weds —</p>
                     <div class="name-line" id="name-line-s"></div>
                 </div>
-
                 <div class="hero-scroll-cue reveal-item" style="--d:4.3s">
                     <span>Scroll to explore</span>
                     <i class="fa-solid fa-chevron-down"></i>
@@ -77,28 +106,35 @@
         <!-- SAVE THE DATE -->
         <section class="section-pad" id="save-date-sec">
             <div class="container">
-                <div class="parchment-card glass-card scroll-in">
-                    <div class="arch-frame">
-                        <img src="assets/save_the_date_cropped.jpg" alt="Save the Date">
+                <div class="save-date-card glass-card scroll-in">
+                    <!-- Flight image fills the card -->
+                    <div class="save-date-bg">
+                        <img src="assets/save_the_date_flight.png" alt="Save the Date">
+                        <div class="save-date-overlay"></div>
                     </div>
-                    <h2 class="card-heading">Save The Date</h2>
-                    <p class="scratch-hint">✦ Scratch the golden seal to reveal our date ✦</p>
-                    <div class="scratch-wrap">
-                        <div class="scratch-box">
-                            <canvas id="scratch-canvas"></canvas>
-                            <div class="scratch-reveal">
-                                <span class="reveal-date">30th August 2026</span>
-                                <span class="reveal-day">SUNDAY</span>
+
+                    <div class="save-date-content">
+                        <h2 class="card-heading">Save The Date</h2>
+                        <p class="scratch-hint">✦ Scratch to reveal our date ✦</p>
+
+                        <div class="scratch-wrap">
+                            <div class="scratch-box">
+                                <canvas id="scratch-canvas"></canvas>
+                                <div class="scratch-reveal">
+                                    <span class="reveal-date">30th August 2026</span>
+                                    <span class="reveal-day">SUNDAY</span>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="countdown-grid hidden-till-scratch" id="countdown-grid">
+                            <div class="count-box"><span class="count-num" id="cd-days">00</span><span class="count-lbl">Days</span></div>
+                            <div class="count-box"><span class="count-num" id="cd-hrs">00</span><span class="count-lbl">Hours</span></div>
+                            <div class="count-box"><span class="count-num" id="cd-min">00</span><span class="count-lbl">Mins</span></div>
+                            <div class="count-box"><span class="count-num" id="cd-sec">00</span><span class="count-lbl">Secs</span></div>
+                        </div>
+                        <p class="count-tagline hidden-till-scratch" id="count-tagline">Until our happily ever after begins…</p>
                     </div>
-                    <div class="countdown-grid hidden-till-scratch" id="countdown-grid">
-                        <div class="count-box"><span class="count-num" id="cd-days">00</span><span class="count-lbl">Days</span></div>
-                        <div class="count-box"><span class="count-num" id="cd-hrs">00</span><span class="count-lbl">Hours</span></div>
-                        <div class="count-box"><span class="count-num" id="cd-min">00</span><span class="count-lbl">Mins</span></div>
-                        <div class="count-box"><span class="count-num" id="cd-sec">00</span><span class="count-lbl">Secs</span></div>
-                    </div>
-                    <p class="count-tagline hidden-till-scratch" id="count-tagline">Until our happily ever after begins…</p>
                 </div>
             </div>
         </section>
